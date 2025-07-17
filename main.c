@@ -4,11 +4,11 @@
 #include <string.h>
 
 void ClearInputBuffer();
-int Add_Student();
-void Display_Student();
-void Search_Student();
-void Update_List();
-void Delete_Student();
+int Add_Student();      /* Fun to add a student*/
+void Display_Student(); /*Fun to dispaly all the student*/
+void Search_Student();  /*Fun to Search for a particular Student from his/her id*/
+void Update_List();     /*Fun to make changes or editing the file idk if it's possilbe*/
+void Delete_Student();  /*Fun to delete a student*/
 
 typedef struct Student
 {
@@ -30,34 +30,43 @@ int main()
       printf("5. Delete the student.\n");
       printf("6. Exit");
       printf("Enter your choice:");
-   } while (option != 6);
 
-   if (scanf("%d , &option") != 1)
-   {
-      printf("Invalid input!! Try again!");
+      if (scanf(" %d", &option) != 1)
+      {
+         printf("Invalid input!! Try again!\n");
+         ClearInputBuffer();
+         option = 0;
+      }
+
       ClearInputBuffer();
-      option = 0;
+
+      switch (option)
+      {
+      case 1:
+         int Add_Student();
+         break;
+      case 2:
+         void Display_Student();
+         break;
+      case 3:
+         void Search_Student();
+         break;
+      case 4:
+         void Update_List();
+         break;
+      case 5:
+         void Delete_Student();
+         break;
+      case 6:
+         printf("Thanks for visiting. Have a nice day :)");
+      default:
+         printf("Invalid input!! Fuck off!!");
+         break;
+      }
+      return 0;
    }
 
-   ClearInputBuffer();
-
-   switch (option)
-   {
-   case 1:
-      int Add_Student();
-      break;
-   case 2:
-      void Display_Student();
-   case 3:
-      void Search_Student();
-   case 4:
-      void Update_List();
-   case 5:
-      void Delete_Student();
-   default:
-      break;
-   }
-   return 0;
+   while (option != 6);
 }
 
 void ClearInputBuffer()
