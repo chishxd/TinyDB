@@ -6,7 +6,8 @@
 // This function adds new Records of Students
 //  Student is a structure with members: roll_no, name, age and marks
 //  Count is used to know the length of array
-void add_student(Student students[100], int* count) {
+
+void add_student(Student students[], int* count) {
   if (*count >= 100) {
     printf("Error: Too many students\n");
     return;
@@ -37,7 +38,7 @@ void add_student(Student students[100], int* count) {
     printf("Invalid Marks\n");
     return;
   }
-
+  students[*count].id = *count;
   students[*count].roll_no = roll_no;
   strcpy(students[*count].name, name);
   students[*count].age = age;
@@ -62,7 +63,29 @@ void list_students(const Student students[], const int count) {
   }
 }
 
-void update_student(Student students[], const int count, const int id) {
+void search_student(const Student students[], const int count) {
+  int id;
+  printf("Enter Student ID: ");
+  if (scanf("%d", &id) != 1) {
+    printf("Invalid id\n");
+  }
+  if (count == 0) {
+    printf("No students found\n");
+    return;
+  }
+  printf("Roll No: %d\n", students[id].roll_no);
+  printf("Name: %s\n", students[id].name);
+  printf("Age: %d\n", students[id].age);
+  printf("Marks: %f\n", students[id].marks);
+  printf("\n");
+}
+
+void update_student(Student students[], const int count) {
+  int id;
+  printf("Enter Student ID: ");
+  if (scanf("%d", &id) != 1) {
+    printf("Invalid id\n");
+  }
   if (id >= count || id < 0) {
     printf("Invalid id\n");
     return;
@@ -105,7 +128,12 @@ void update_student(Student students[], const int count, const int id) {
   printf("Updated student at ID: %d\n", id);
 }
 
-void delete_student(Student students[], int* count, int id) {
+void delete_student(Student students[], int* count) {
+  int id;
+  printf("Enter ID to delete: ");
+  if (scanf("%d", &id) != 1) {
+    printf("Invalid id\n");
+  }
   if (id >= *count || id < 0) {
     printf("Invalid id\n");
     return;

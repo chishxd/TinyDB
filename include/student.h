@@ -2,6 +2,7 @@
 #define STUDENT_H
 
 typedef struct {
+  int id;
   int roll_no;
   char name[50];
   int age;
@@ -10,7 +11,8 @@ typedef struct {
 
 void add_student(Student students[], int *count);
 void list_students(const Student students[], int count);
-void update_student(Student students[], int count, int id);
-void delete_student(Student students[], int *count, int id);
+void search_student(const Student students[], const int count);
+void update_student(Student students[], int count);
+void delete_student(Student students[], int *count);
 
 #endif  // STUDENT_H
