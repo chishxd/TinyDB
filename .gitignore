@@ -116,4 +116,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#Custom .gitignore
+.clang-format
+.idea/codeStyles/codeStyleConfig.xml
+.idea/editor.xml
 # End of https://www.toptal.com/developers/gitignore/api/c,linux,windows,visualstudiocode
