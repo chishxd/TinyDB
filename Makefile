@@ -1,8 +1,11 @@
 CC = gcc
-CFLAGS = -Wall -Iinclude
+CFLAGS = -Wall -Iinclude -g
+SRC = $(wildcard src/*.c)
+OUT = bin/tinydb
 
-tinydb: $(wildcard src/*.c)
-	$(CC) $(CFLAGS) $(wildcard src/*.c) -o tinydb
+all: $(SRC)
+	mkdir -p bin
+	$(CC) $(CFLAGS) $(SRC) -o $(OUT)
 
 clean:
-	rm -f tinydb
+	rm -f $(OUT)
