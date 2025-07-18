@@ -28,7 +28,7 @@ int main()
       printf("3. Search a student.\n");
       printf("4. Update the list.\n");
       printf("5. Delete the student.\n");
-      printf("6. Exit");
+      printf("6. Exit\n");
       printf("Enter your choice:");
 
       if (scanf(" %d", &option) != 1)
@@ -72,7 +72,7 @@ int main()
 void ClearInputBuffer()
 {
    int c;
-   while ((c = getchar()) != ' \n' && c != EOF)
+   while ((c = getchar()) != '\n' && c != EOF)
       ;
 }
 
