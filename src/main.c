@@ -1,100 +1,65 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <string.h>
+#include "library.h"
 
-void ClearInputBuffer();
-int Add_Student();      /* Fun to add a student*/
-void Display_Student(); /*Fun to dispaly all the student*/
-void Search_Student();  /*Fun to Search for a particular Student from his/her id*/
-void Update_List();     /*Fun to make changes or editing the file idk if it's possilbe*/
-void Delete_Student();  /*Fun to delete a student*/
-
-typedef struct Student
-{
-   char name[100];
-   char grade;
-   int id;
-};
+/*
+cd /home/dadaso/TinyDB/src/
+gcc main.c library.c -o student_app
+./student_app
+*/
 
 int main()
 {
-   int option;
-   printf("==== STUDENT MANAGMENT SYSTEM ====\n");
-   do
-   {
-      printf("1. Add a student.\n");
-      printf("2. Display all student.\n");
-      printf("3. Search a student.\n");
-      printf("4. Update the list.\n");
-      printf("5. Delete the student.\n");
-      printf("6. Exit\n");
-      printf("Enter your choice:");
+    int option;
+    printf("==== STUDENT MANAGEMENT SYSTEM ====\n");
 
-      if (scanf(" %d", &option) != 1)
-      {
-         printf("Invalid input!! Try again!\n");
-         ClearInputBuffer();
-         option = 0;
-      }
+    do
+    {
+        printf("|-- Options --|\n");
+        printf("1. Add Student\n");
+        printf("2. Display All Student\n");
+        printf("3. Search Student by ID\n");
+        printf("4. Update Student Record\n");
+        printf("5. Delete All Student Records\n");
+        printf("6. Exit\n");
+        printf("Enter your choice: ");
 
-      ClearInputBuffer();
+        if (scanf(" %d", &option) != 1)
+        {
+            printf("Invalid input. Try again!\n");
+            clearInputBuffer();
+            option = 0;
+            continue;
+        }
+        clearInputBuffer();
 
-      switch (option)
-      {
-      case 1:
-         Add_Student();
-         break;
-      case 2:
-         Display_Student();
-         break;
-      case 3:
-         Search_Student();
-         break;
-      case 4:
-         Update_List();
-         break;
-      case 5:
-         Delete_Student();
-         break;
-      case 6:
-         printf("Thanks for visiting. Have a nice day :)");
-      default:
-         printf("Invalid input!! Fuck off!!");
-         break;
-      }
-      return 0;
-   }
+        switch (option)
+        {
+        case 1:
+            Add_Student();
+            break;
+        case 2:
+            Display_Student();
+            break;
+        case 3:
+            Search_Student();
+            break;
+        case 4:
+            Update_list();
+            break;
+        case 5:
+            Delete_Record();
+            break;
+        case 6:
+            printf("Thanks for your service. Have a nice day! :)\n");
+            break;
+        default:
+            printf("Invalid Input. Fuck Off!\n");
+            break;
+        }
+    } while (option != 6);
 
-   while (option != 6);
-}
-
-void ClearInputBuffer()
-{
-   int c;
-   while ((c = getchar()) != '\n' && c != EOF)
-      ;
-}
-
-int Add_Student()
-{
-   printf("hii");
-   return 0;
-}
-
-void Display_Student()
-{
-   printf("hii");
-}
-void Search_Student()
-{
-   printf("hii");
-}
-void Update_List()
-{
-   printf("hii");
-}
-void Delete_Student()
-{
-   printf("hii");
+    return 0;
 }
