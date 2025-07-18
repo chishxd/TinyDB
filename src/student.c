@@ -104,3 +104,16 @@ void update_student(Student students[], const int count, const int id) {
 
   printf("Updated student at ID: %d\n", id);
 }
+
+void delete_student(Student students[], int* count, int id) {
+  if (id >= *count || id < 0) {
+    printf("Invalid id\n");
+    return;
+  }
+  printf("Deleting student at ID: %d\n", id);
+  for (int i = id; i < *count - 1; i++) {
+    students[i] = students[i + 1];
+  }
+  (*count)--;
+  printf("Student deleted successfully\n");
+}
