@@ -51,3 +51,16 @@ bool read_float(const char *prompt, float *out) {
   *out = result;
   return true;
 }
+
+bool read_string(const char *prompt, char *buffer, const size_t buffer_size) {
+  if (!prompt || !buffer || buffer_size == 0) return false;
+
+  printf("%s", prompt);
+
+  if (!fgets(buffer, (int)buffer_size, stdin)) return false;
+
+  // Remove newline if present
+  buffer[strcspn(buffer, "\n")] = '\0';
+
+  return true;
+}
