@@ -21,11 +21,13 @@ void add_student(Student students[], int* count) {
     printf("Error: Invalid roll number\n");
   }
 
+
   do {
-    printf("Enter Name: ");
-    fgets(name, sizeof(name), stdin);
-    name[strcspn(name, "\n")] = 0;
+    if (!read_string("Enter Name: ", name, sizeof(name))) {
+      fprintf(stderr, "Input error.\n");
+    }
   } while (strlen(name) == 0);
+
 
   while (!read_integer("Enter Age: ", &age)) {
     printf("Error: Invalid age\n");
@@ -96,12 +98,14 @@ void update_student(Student students[], const int count) {
   while(!read_integer("Enter Roll No: ", &roll_no)) {
     printf("Invalid roll number\n");
   }
-  char name[50];
+  char name[64];
+
   do {
-    printf("Enter Name: ");
-    fgets(name, sizeof(name), stdin);
-    name[strcspn(name, "\n")] = 0;
+    if (!read_string("Enter Name: ", name, sizeof(name))) {
+      fprintf(stderr, "Input error.\n");
+    }
   } while (strlen(name) == 0);
+
 
   name[strcspn(name, "\n")] = '\0'; // Strip trailing newline
 

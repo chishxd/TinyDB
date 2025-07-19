@@ -1,12 +1,7 @@
-#include <ctype.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
 #include "student.h"
 #include "utils.h"
-
-void ClearInputBuffer();
 
 int main() {
   Student student[100];
@@ -53,8 +48,3 @@ int main() {
 
   } while (option != 6);
 }
-
-  void ClearInputBuffer(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
-  }
