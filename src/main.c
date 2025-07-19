@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "student.h"
+#include "utils.h"
 
 void ClearInputBuffer();
 
@@ -21,14 +22,9 @@ int main() {
     printf("4. Update the list.\n");
     printf("5. Delete a student.\n");
     printf("6. Exit\n");
-    printf("Enter your choice: ");
 
-    if (scanf(" %d", &option) != 1) {
+    if (!read_integer("Enter your choice: ", &option)) {
       printf("Invalid input! Please enter a number.\n");
-      ClearInputBuffer();
-      continue;
-    } else {
-      ClearInputBuffer();
     }
 
     switch (option) {
