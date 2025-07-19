@@ -2,10 +2,7 @@
 
 #include <ctype.h>
 #include <errno.h>
-#include <limits.h>
-#include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "string.h"
 #include "utils.h"
@@ -99,6 +96,15 @@ void update_student(Student students[], const int count) {
   while(!read_integer("Enter Roll No: ", &roll_no)) {
     printf("Invalid roll number\n");
   }
+  char name[50];
+  do {
+    printf("Enter Name: ");
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = 0;
+  } while (strlen(name) == 0);
+
+  name[strcspn(name, "\n")] = '\0'; // Strip trailing newline
+
   int age;
   while (!read_integer("Enter Age: ", &age)) {
     printf("Invalid age\n");
@@ -107,14 +113,6 @@ void update_student(Student students[], const int count) {
   while (!read_float("Enter Age: ", &marks)) {
     printf("Invalid marks\n");
   }
-
-  char name[50];
-  printf("Enter Name: ");
-  getchar(); // Clear newline left by previous input
-  if (fgets(name, sizeof(name), stdin) == NULL) {
-    printf("Failed to read name.\n");
-  }
-  name[strcspn(name, "\n")] = '\0'; // Strip trailing newline
 
   students[id].roll_no = roll_no;
   students[id].age = age;
