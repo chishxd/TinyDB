@@ -11,23 +11,25 @@ int main() {
   Student student[100];
   int count = 0;
   int option;
-  printf("==== STUDENT MANAGMENT SYSTEM ====\n");
+
+  printf("==== STUDENT MANAGEMENT SYSTEM ====\n");
+
   do {
-    printf("1. Add a student.\n");
-    printf("2. Display all student.\n");
+    printf("\n1. Add a student.\n");
+    printf("2. Display all students.\n");
     printf("3. Search a student.\n");
     printf("4. Update the list.\n");
-    printf("5. Delete the student.\n");
+    printf("5. Delete a student.\n");
     printf("6. Exit\n");
-    printf("Enter your choice:");
+    printf("Enter your choice: ");
 
     if (scanf(" %d", &option) != 1) {
-      printf("Invalid input!! Try again!\n");
+      printf("Invalid input! Please enter a number.\n");
       ClearInputBuffer();
-      option = 0;
+      continue;
+    } else {
+      ClearInputBuffer();
     }
-
-    ClearInputBuffer();
 
     switch (option) {
       case 1:
@@ -46,19 +48,17 @@ int main() {
         delete_student(student, &count);
         break;
       case 6:
-        printf("Thanks for visiting. Have a nice day :)");
+        printf("Thanks for visiting. Have a nice day :)\n");
         break;
       default:
-        printf("Invalid input!! Fuck off!!");
+        printf("Invalid option. Please try again.\n");
         break;
     }
+
+  } while (option != 6);
+}
+
+  void ClearInputBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
   }
-
-  while (option != 6);
-  return 0;
-}
-
-void ClearInputBuffer() {
-  int c;
-  while ((c = getchar()) != '\n' && c != EOF);
-}

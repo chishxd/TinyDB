@@ -1,51 +1,54 @@
 #include "student.h"
 
+#include <ctype.h>
+#include <errno.h>
+#include <limits.h>
+#include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
 
-// This function adds new Records of Students
-//  Student is a structure with members: roll_no, name, age and marks
-//  Count is used to know the length of array
+#include "string.h"
+#include "utils.h"
 
 void add_student(Student students[], int* count) {
   if (*count >= 100) {
     printf("Error: Too many students\n");
     return;
   }
-  int roll_no;
+
   char name[50];
-  int age;
+  int roll_no, age;
   float marks;
 
-  printf("Enter Roll No: ");
-  if (scanf("%d", &roll_no) != 1) {
-    printf("Invalid roll number\n");
-    return;
-  }
-  getchar();  // Consume the newline character left by scanf
-  printf("Enter Name: ");
-  fgets(name, sizeof(name), stdin);
-  name[strcspn(name, "\n")] = 0;  // Remove trailing newline from fgets
-
-  printf("Enter Age: ");
-  if (scanf("%d", &age) != 1) {
-    printf("Invalid age\n");
-    return;
+  while (!read_integer("Enter Roll No: ", &roll_no)) {
+    printf("Error: Invalid roll number\n");
   }
 
-  printf("Enter Marks: ");
-  if (scanf("%f", &marks) != 1) {
-    printf("Invalid Marks\n");
-    return;
+  do {
+    printf("Enter Name: ");
+    fgets(name, sizeof(name), stdin);
+    name[strcspn(name, "\n")] = 0;
+  } while (strlen(name) == 0);
+
+  while (!read_integer("Enter Age: ", &age)) {
+    printf("Error: Invalid age\n");
   }
+
+  while (!read_float("Enter Marks: ", &marks)) {
+    printf("Error: Invalid marks\n");
+  }
+
   students[*count].id = *count;
   students[*count].roll_no = roll_no;
   strcpy(students[*count].name, name);
   students[*count].age = age;
   students[*count].marks = marks;
 
+  printf("Student added successfully with ID %d\n", *count);
+
   (*count)++;
 }
+
 
 // This Function Lists Added Students
 // Accepts Students Structure for now
@@ -54,6 +57,7 @@ void list_students(const Student students[], const int count) {
     printf("No students found\n");
   } else {
     for (int i = 0; i < count; i++) {
+      printf("ID: %d\n", students[i].id);
       printf("Roll No: %d\n", students[i].roll_no);
       printf("Name: %s\n", students[i].name);
       printf("Age: %d\n", students[i].age);
@@ -65,14 +69,14 @@ void list_students(const Student students[], const int count) {
 
 void search_student(const Student students[], const int count) {
   int id;
-  printf("Enter Student ID: ");
-  if (scanf("%d", &id) != 1) {
-    printf("Invalid id\n");
+  if (!read_integer("Enter ID: ", &id)) {
+    printf("Error: Invalid roll number\n");
   }
   if (count == 0) {
     printf("No students found\n");
     return;
   }
+  printf("Student ID: %d\n", id);
   printf("Roll No: %d\n", students[id].roll_no);
   printf("Name: %s\n", students[id].name);
   printf("Age: %d\n", students[id].age);
@@ -82,58 +86,55 @@ void search_student(const Student students[], const int count) {
 
 void update_student(Student students[], const int count) {
   int id;
-  printf("Enter Student ID: ");
-  if (scanf("%d", &id) != 1) {
-    printf("Invalid id\n");
+  while(!read_integer("Enter ID: ", &id)) {
+    printf("Error: Invalid roll number\n");
   }
-  if (id >= count || id < 0) {
-    printf("Invalid id\n");
-    return;
+  while (id < 0 || id >= count) {
+    printf("Invalid ID\n");
   }
 
   printf("Updating student at ID: %d\n", id);
 
   int roll_no;
-  char name[50];
-  int age;
-  float marks;
-
-  printf("Enter Roll No: ");
-  if (scanf("%d", &roll_no) != 1) {
+  while(!read_integer("Enter Roll No: ", &roll_no)) {
     printf("Invalid roll number\n");
-    return;
   }
-  getchar();  // Consume the newline character left by scanf
-  printf("Enter Name: ");
-  fgets(name, sizeof(name), stdin);
-  name[strcspn(name, "\n")] = 0;  // Remove trailing newline from fgets
-
-  printf("Enter Age: ");
-  if (scanf("%d", &age) != 1) {
+  int age;
+  while (!read_integer("Enter Age: ", &age)) {
     printf("Invalid age\n");
-    return;
+  }
+  float marks;
+  while (!read_float("Enter Age: ", &marks)) {
+    printf("Invalid marks\n");
   }
 
-  printf("Enter Marks: ");
-  if (scanf("%f", &marks) != 1) {
-    printf("Invalid Marks\n");
-    return;
+  char name[50];
+  printf("Enter Name: ");
+  getchar(); // Clear newline left by previous input
+  if (fgets(name, sizeof(name), stdin) == NULL) {
+    printf("Failed to read name.\n");
   }
+  name[strcspn(name, "\n")] = '\0'; // Strip trailing newline
 
   students[id].roll_no = roll_no;
-  strcpy(students[id].name, name);
   students[id].age = age;
   students[id].marks = marks;
+  strcpy(students[id].name, name);
 
   printf("Updated student at ID: %d\n", id);
 }
 
+
 void delete_student(Student students[], int* count) {
   int id;
-  printf("Enter ID to delete: ");
-  if (scanf("%d", &id) != 1) {
-    printf("Invalid id\n");
+  if(!read_integer("Enter ID: ", &id)) {
+    printf("Error: Invalid ID\n");
+    return;
   }
+  // printf("Enter ID to delete: ");
+  // if (scanf("%d", &id) != 1) {
+  //   printf("Invalid id\n");
+  // }
   if (id >= *count || id < 0) {
     printf("Invalid id\n");
     return;
