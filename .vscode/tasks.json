@@ -1,25 +1,26 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Build TinyDB",
-      "type": "shell",
-      "command": "make",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": []
-    },
-    {
-      "label": "Run TinyDB",
-      "type": "shell",
-      "command": "./bin/tinydb",
-      "dependsOn": ["Build TinyDB"],
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      }
-    }
-  ]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build with Make",
+            "type": "shell",
+            "command": "make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Runs 'make' to compile the project."
+        },
+        {
+            "label": "Clean with Make",
+            "type": "shell",
+            "command": "make clean",
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Runs 'make clean' to remove build artifacts."
+        }
+    ]
 }

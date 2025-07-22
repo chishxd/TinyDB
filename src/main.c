@@ -8,7 +8,7 @@ int main() {
   int count = 0;
   int option;
 
-  printf("==== STUDENT MANAGEMENT SYSTEM ====\n");
+  printf("\n==== STUDENT MANAGEMENT SYSTEM ====\n");
 
   do {
     printf("\n1. Add a student.\n");
